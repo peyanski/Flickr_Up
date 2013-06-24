@@ -1,0 +1,12 @@
+defaults:
+    api_key: ''
+    shared_secret: ''
+    access_token: ''
+    access_secret: ''
+    target_dir: '/mnt/share/My Documents/Backup/Lightroom/all/Snimki/'
+    allowed_ext: ['.jpg', '.png', '.JPG', '.jpeg', '.JPEG']
+    is_public: '0' 
+    is_friend: '0' 
+    is_family: '0' 
+    hidden: '2'
+    photoset_id: '' 
