@@ -35,7 +35,7 @@ Please, follow the steps described below to get the Flickr_Up working.
 
 run `ruby authenticate.rb` from 'tools' subdirectory to get your *access_token* and *access_secret*
 
-	$ cd tools
+    $ cd tools
     $ ruby authenticate.rb
     Open this url in your process to complete the authication process : http://www.flickr.com/services/oauth/authorize?oauth_token=AAAAAAAAAAAAAAAAA-bbbbbbbbbbbb&perms=delete
     Copy here the number given when you complete the process.
@@ -48,7 +48,7 @@ You can now add token (access_token) and (access_secret) secret to your *config.
 
 You will have to choose an existing Flickr Set to upload your files. You can use 'get_phtotsets.rb' script to fetch all existing Flickr sets and to get the ID you want form the generated "photosets.yml" file. Or you can log on to Flickr and enter to the set that you want to use and after that to copy the ID from the URL in your browser (as example: http://www.flickr.com/photos/your_user/sets/72157631234567890/ - copy only the digits - 72157631234567890)
 	
-	$ cd tools
+    $ cd tools
     $ ruby get_photosets.rb 
     You are now authenticated as peyanski
     photosets.yml saved.
