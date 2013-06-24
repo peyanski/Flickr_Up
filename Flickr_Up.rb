@@ -8,7 +8,7 @@ require 'yaml'
 APP_CONFIG = YAML.load_file("config.yml")['defaults']
 
 if APP_CONFIG['target_dir'].nil? or APP_CONFIG['target_dir'].empty? or !File.exists? APP_CONFIG['target_dir']
-  puts "Your config upload_path is empty or config.yml doesn't exist."
+  puts "Your target_dir: options is empty or config.yml doesn't exist."
   exit
 end
 
@@ -23,8 +23,8 @@ photoset_id = APP_CONFIG['photoset_id']
 
 
 if !File.exists?('uploaded_files.yml') or File.zero? ('uploaded_files.yml') # if the file doesn't exist or it's empty
-  puts "Your config uploaded_files is empty or doesn't exist."
-  puts "Creating 'uploaded_files.yml' file and adding some text inside"
+  puts "Your 'uploaded_files.yml' is empty or doesn't exist..."
+  puts "Creating 'uploaded_files.yml' file!"
   uploaded = File.new("uploaded_files.yml", "w+")    # open file for read and write
   uploaded.puts("Uploaded")    
   uploaded.close

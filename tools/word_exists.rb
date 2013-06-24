@@ -1,1 +1,0 @@
-def word_exists(string)			f = File.open("your_file.txt") #opens the file for reading			f.each do line				print line				if line.match (string)					return true				end			end			false		endendstart_uploading = word_exists(md5)puts start_uploading
