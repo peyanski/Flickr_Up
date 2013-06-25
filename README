@@ -9,10 +9,15 @@ exceptions.yml - store all exception during the run of the Flickr_Up(Timeout::Er
 
 ## Prerequisites
 
-* Ruby
-* flickraw: https://github.com/hanklords/flickraw
-* Yaml
-
+* A Flickr account - of course
+* Ruby 
+	- For Windows go to http://rubyinstaller.org/ 
+	- For Ubuntu type '$ sudo apt-get install ruby' 
+	- For OpenWRT type '# opkg install ruby*'
+* flickraw: 
+	- Go to - https://github.com/hanklords/flickraw 
+	- or try 'gem install flickraw' from command window
+* Yaml - standard Ruby module
 
 ## Tested on
 

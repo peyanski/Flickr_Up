@@ -1,14 +1,12 @@
-
 require 'flickraw'
 require 'find'
 require 'yaml'
 
 
-
 APP_CONFIG = YAML.load_file("config.yml")['defaults']
 
 if APP_CONFIG['target_dir'].nil? or APP_CONFIG['target_dir'].empty? or !File.exists? APP_CONFIG['target_dir']
-  puts "Your target_dir: options is empty or config.yml doesn't exist."
+  puts "Your target_dir: option is empty or config.yml doesn't exist."
   exit
 end
 
@@ -21,30 +19,29 @@ photoset_id = APP_CONFIG['photoset_id']
 #target_dir = './photo/'
 
 
-
 if !File.exists?('uploaded_files.yml') or File.zero? ('uploaded_files.yml') # if the file doesn't exist or it's empty
   puts "Your 'uploaded_files.yml' is empty or doesn't exist..."
   puts "Creating 'uploaded_files.yml' file!"
   uploaded = File.new("uploaded_files.yml", "w+")    # open file for read and write
   uploaded.puts("Uploaded")    
   uploaded.close
-  #exit
 end
-thing = YAML.load_file('uploaded_files.yml') # load all yml file
-#thing = IO.readlines('uploaded_files.yml') # use this one if you don't have yaml module
+
+read_uploaded = YAML.load_file('uploaded_files.yml') # load all yml file
+
 
 Find.find(target_dir) do |file|
   
   if !FileTest.directory?(file)
     
-    #puts thing.inspect
+    #puts read_uploaded.inspect
 	md5 = Digest::MD5.file(file).hexdigest  # get md5 checksum of the file
 	filename = File.basename file 			# get only the filename without full path
 	if not APP_CONFIG['allowed_ext'].include? File.extname(filename) 
 		puts "Skipping '#{filename}' due to restriction in config.yml"
 		File.open('skipped_files.yml', 'a') { |new_file| new_file.puts(file) } # all skipped files goes to a file
 	else
-		if !thing.include?(md5)
+		if !read_uploaded.include?(md5)
 		  puts "Start uploading #{filename} ..."
 		  begin 
 			picture_id = flickr.upload_photo file, :title => filename, :description => "", 
@@ -54,9 +51,7 @@ Find.find(target_dir) do |file|
 							:is_family => APP_CONFIG['is_family'],
 							:hidden => APP_CONFIG['hidden']
 
-		  #rescue Timeout::Error,Selenium::WebDriver::Error::NoSuchElementError => e
-		  #retry
-			rescue StandardError,Timeout::Error => e
+		    rescue StandardError,Timeout::Error => e
 			  puts "Exception #{e.class} : #{e}"
 			  File.open('exceptions.yml', 'a') { |new_file| new_file.puts(file.to_s + ' - ' + e.to_s) } 
 			  puts "I am rescued"
@@ -67,7 +62,7 @@ Find.find(target_dir) do |file|
 		
 		  if picture_id
 			puts "\t upload done."
-			# adding uploaded photo to photoset configured in config.yml
+			# adding uploaded photo to Flickr Set configured in config.yml
 			res = flickr.call "flickr.photosets.addPhoto", {'photoset_id' => photoset_id, 'photo_id' => picture_id}
 		  end
 		  puts "Adding #{file} to uploaded_files.yml"
@@ -78,5 +73,5 @@ Find.find(target_dir) do |file|
     end
   end
 end  
-puts "Congrats!"
+puts "Congrats!" # all your photos should be uploaded to flickr if you are reading this!
 
