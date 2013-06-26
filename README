@@ -1,7 +1,11 @@
 Flickr_Up
 ====================
 
-Flickr_Up is a ruby script that can be used to find all photos from a target directory recursively and automatically upload them to Flickr. It also stores the MD5 checksum of the uploaded files in a local file in order to save the progress and not to upload suspected duplicates. Flickr_Up will create the following files during its run:
+Flickr_Up is a ruby script that can be used to find all photos from a target directory recursively and automatically upload them to Flickr. It also stores the MD5 checksum of the uploaded files in a local file in order to save the progress and not to upload suspected duplicates. 
+
+For more detailed instructions about this script go to - http://kupemo.blogspot.com/2013/06/flickrup-or-how-to-upload-all-of-your.html
+
+Flickr_Up will create the following files during its run:
 
 uploaded_files.yml - that contains full path and the filename of the uploaded photos and their MD5 checksum
 skipped_files.yml - all files that are skipped due to a restriction in config.yml or something else 
